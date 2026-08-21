@@ -1,7 +1,7 @@
 /* Festival Sape & Lumière — JavaScript Vanilla */
 
 /* À REMPLACER AVANT LIVRAISON */
-const WHATSAPP_NUMBER = "242000000000";
+const WHATSAPP_NUMBER = "+242069552979";
 const FESTIVAL_OPENING_DATE = null;
 // Exemple de date : "2026-12-04T18:00:00+01:00"
 
@@ -140,7 +140,7 @@ function buildWhatsAppUrl(passName) {
 document.querySelectorAll(".whatsapp-link").forEach(link => {
   link.addEventListener("click", event => {
     event.preventDefault();
-    if (WHATSAPP_NUMBER === "242000000000") {
+    if (WHATSAPP_NUMBER === "242 06 955 29 79") {
       alert("Le numéro WhatsApp de l'organisation doit être renseigné dans script.js.");
       return;
     }
