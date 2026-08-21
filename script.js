@@ -32,48 +32,61 @@ window.addEventListener("scroll", () => {
 }, { passive: true });
 
 /* Compte à rebours */
-const countdown = document.querySelector("#countdown");
-const countdownNote = document.querySelector("#countdown-note");
-const units = {
-  days: countdown.querySelector('[data-unit="days"]'),
-  hours: countdown.querySelector('[data-unit="hours"]'),
-  minutes: countdown.querySelector('[data-unit="minutes"]'),
-  seconds: countdown.querySelector('[data-unit="seconds"]')
-};
+const festivalDate = new Date("2026-12-04T18:00:00+01:00").getTime();
 
-function pad(value) { return String(value).padStart(2, "0"); }
+const countdown = setInterval(function () {
 
-function updateCountdown() {
-  if (!FESTIVAL_OPENING_DATE) {
-    Object.values(units).forEach(unit => unit.textContent = "--");
-    countdownNote.textContent = "Date d'ouverture à confirmer par l'organisation.";
-    return;
-  }
+    const now = new Date().getTime();
 
-  const target = new Date(FESTIVAL_OPENING_DATE).getTime();
-  const distance = target - Date.now();
+    const difference = festivalDate - now;
 
-  if (Number.isNaN(target)) {
-    countdownNote.textContent = "Date d'ouverture invalide — à corriger dans script.js.";
-    return;
-  }
+    if (difference <= 0) {
 
-  if (distance <= 0) {
-    Object.values(units).forEach(unit => unit.textContent = "00");
-    countdownNote.textContent = "Le festival a commencé.";
-    return;
-  }
+        clearInterval(countdown);
 
-  const totalSeconds = Math.floor(distance / 1000);
-  units.days.textContent = String(Math.floor(totalSeconds / 86400));
-  units.hours.textContent = pad(Math.floor((totalSeconds % 86400) / 3600));
-  units.minutes.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
-  units.seconds.textContent = pad(totalSeconds % 60);
-  countdownNote.textContent = "Rendez-vous à Brazzaville pour l'ouverture.";
-}
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+        document.getElementById("countdown-message").textContent =
+            "Le Festival Sape & Lumière a commencé !";
+
+        return;
+    }
+
+    const days = Math.floor(
+        difference / (1000 * 60 * 60 * 24)
+    );
+
+    const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+        (difference % (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+
+    const seconds = Math.floor(
+        (difference % (1000 * 60)) /
+        1000
+    );
+
+    document.getElementById("days").textContent =
+        String(days).padStart(2, "0");
+
+    document.getElementById("hours").textContent =
+        String(hours).padStart(2, "0");
+
+    document.getElementById("minutes").textContent =
+        String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").textContent =
+        String(seconds).padStart(2, "0");
+
+}, 1000);
 
 /* Programme */
 const tabs = document.querySelectorAll(".tab");

@@ -95,6 +95,8 @@ button {
 
 .section-heading {
   margin-bottom:52px;
+  display: flex;
+  flex-direction: column;
 }
 
 .section-heading.center {
@@ -108,12 +110,13 @@ button {
 }
 
 .section-heading h2,.section-copy h2 {
-  margin:10px 0 20px;
+  margin:10px 0;
   font-family:var(--font);
   font-weight:600;
-  font-size:clamp(3rem,6vw,5.6rem);
-  line-height:.88;
+  font-size: 3.8rem;
   letter-spacing:-.045em;
+  position: relative;
+  left: -250px;
 }
 
 h2 em,h1 em {
@@ -137,6 +140,8 @@ h2 em,h1 em {
   font-weight:700;
   letter-spacing:.22em;
   color:var(--gold);
+  position: relative;
+  left: -440px;
 }
 
 .eyebrow.dark {
@@ -399,7 +404,7 @@ h2 em,h1 em {
 
 .countdown-grid strong {
   display:block;
-  font-family:var(--serif);
+  font-family:var(--sans);
   font-size:30px;
 }
 
@@ -775,11 +780,24 @@ h2 em,h1 em {
 }
 
 .faq-layout {
-  display:grid;
-  grid-template-columns:.8fr 1.2fr;
+  display:flex;
+  flex-direction: column;
   gap:80px;
   align-items:start;
 }
+
+.faq-titles h2{
+   font-family: var(--font);
+   font-size: 3.5rem;
+   
+}
+
+.faq-titles p{
+  position: relative;
+  top: -40px;
+}
+
+
 
 .faq-list details {
   border-top:1px solid var(--line);
@@ -790,19 +808,25 @@ h2 em,h1 em {
 }
 
 .faq-list summary {
-  min-height:62px;
+  min-height:70px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:20px;
   cursor:pointer;
   list-style:none;
-  font-size:13px;
+  font-size:14px;
   font-weight:600;
+  width: 100%;
+  min-width: 1240px;
+  transition: 0.3s ease-in;
+
 }
 
-.faq-list summary::-webkit-details-marker {
-  display:none;
+.faq-list summary:hover{
+  background-color:var(--muted);
+  transform: scaleY(1.1);
+  padding: 0 10px;
 }
 
 .faq-list summary span {
@@ -840,6 +864,7 @@ h2 em,h1 em {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:25px;
+  width: 100%;
 }
 
 .contact-details div {
@@ -856,6 +881,8 @@ h2 em,h1 em {
 .contact-details strong {
   font-size:11px;
 }
+
+.section-heading
 
 .contact-form {
   padding:36px;
@@ -935,12 +962,11 @@ h2 em,h1 em {
   gap:8px;
 }
 
-.socials a {
+.socials a img {
   display:grid;
   place-items:center;
   width:40px;
   height:40px;
-  border:1px solid var(--line-light);
   font-size:9px;
 }
 
